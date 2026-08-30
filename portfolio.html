@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINAHIL SHAHID | Software Developer Portfolio</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-soft:#121826;
+    --panel:#161d2e;
+    --line:#242c3d;
+    --text:#e7ebf3;
+    --text-dim:#8b93a7;
+    --accent:#f5a524;
+    --accent-soft:#3a2f18;
+    --mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+  }
+ 
+  /* hero load-in */
+  @keyframes riseIn{
+    from{opacity:0;transform:translateY(18px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .hero-photo{animation:riseIn .7s cubic-bezier(.2,.8,.2,1) both;}
+  .eyebrow{animation:riseIn .7s cubic-bezier(.2,.8,.2,1) .08s both;}
+  h1{animation:riseIn .7s cubic-bezier(.2,.8,.2,1) .16s both;}
+  .role{animation:riseIn .7s cubic-bezier(.2,.8,.2,1) .24s both;}
+  .lede{animation:riseIn .7s cubic-bezier(.2,.8,.2,1) .32s both;}
+  .cta-row{animation:riseIn .7s cubic-bezier(.2,.8,.2,1) .4s both;}
+  .editor{animation:riseIn .8s cubic-bezier(.2,.8,.2,1) .48s both;}
+ 
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  .reveal-stagger.is-visible > *{animation:riseIn .55s ease both;}
+  .reveal-stagger.is-visible > *:nth-child(1){animation-delay:.05s;}
+  .reveal-stagger.is-visible > *:nth-child(2){animation-delay:.13s;}
+  .reveal-stagger.is-visible > *:nth-child(3){animation-delay:.21s;}
+  .reveal-stagger.is-visible > *:nth-child(4){animation-delay:.29s;}
+  .reveal-stagger.is-visible > *:nth-child(5){animation-delay:.37s;}
+  .reveal-stagger.is-visible > *:nth-child(6){animation-delay:.45s;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+ 
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(13,17,23,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+  .logo{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--accent);transition:letter-spacing .3s ease;}
+  .logo:hover{letter-spacing:0.5px;}
+  .logo span{color:var(--text-dim);}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--text-dim);}
+  .nav-links a{position:relative;padding-bottom:3px;transition:color .2s ease;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-links a:hover{color:var(--accent);}
+  .nav-links .num{color:var(--accent);font-family:var(--mono);font-size:12px;margin-right:6px;}
+ 
+  /* HERO - code editor window */
+  .hero{padding:90px 0 70px;}
+  .hero-top{display:flex;gap:44px;align-items:flex-start;margin-bottom:40px;}
+ .hero-photo{
+  flex-shrink:0;width:320px;height:320px;border-radius:50%;overflow:hidden;
+  border:none;position:relative;background:var(--accent-soft);
+}
+  .hero-photo::after{
+    content:'';position:absolute;inset:0;border-radius:16px;
+    box-shadow:0 0 0 4px var(--accent-soft);pointer-events:none;
+  }
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:center 100%;display:block;
+  filter:contrast(1.12) saturate(1.1) brightness(1.03);
+  image-rendering:-webkit-optimize-contrast;
+  transform:scale(1.001); /* forces GPU rendering, reduces blur on some browsers */
+} @media(max-width:640px){.hero-top{flex-direction:column;align-items:flex-start;}
+  .hero-photo{width:220px;height:220px;}}
+  .eyebrow{
+    font-family:var(--mono);color:var(--accent);font-size:14px;
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 4px var(--accent-soft);}
+  h1{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-0.02em;margin-bottom:12px;}
+  h1 .accent{color:var(--accent);}
+  .role{font-family:var(--mono);font-size:clamp(16px,2.2vw,20px);color:var(--text-dim);margin-bottom:26px;}
+  .role .cursor{display:inline-block;width:9px;height:20px;background:var(--accent);margin-left:2px;
+    animation:blink 1s steps(1) infinite;vertical-align:-3px;}
+  @keyframes blink{50%{opacity:0;}}
+  .lede{max-width:560px;color:var(--text-dim);font-size:16px;margin-bottom:36px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px;}
+  .btn{
+    font-family:var(--mono);font-size:14px;padding:12px 22px;border-radius:6px;
+    border:1px solid var(--line);transition:transform .2s ease,box-shadow .2s ease,opacity .2s ease,border-color .2s ease,color .2s ease;
+    display:inline-block;
+  }
+  .btn-primary{background:var(--accent);color:#1a1206;font-weight:700;border-color:var(--accent);}
+  .btn-primary:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 10px 24px -8px rgba(245,165,36,.5);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+ 
+  .editor{
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+  }
+  .editor-bar{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);
+    background:var(--bg-soft);
+  }
+  .dot{width:11px;height:11px;border-radius:50%;}
+  .dot.r{background:#ff5f56;} .dot.y{background:#ffbd2e;} .dot.g{background:#27c93f;}
+  .editor-title{margin-left:10px;font-family:var(--mono);font-size:12px;color:var(--text-dim);}
+  .editor-body{padding:22px 24px;font-family:var(--mono);font-size:13.5px;color:var(--text-dim);}
+  .editor-body .k{color:#ff7b72;} .editor-body .s{color:#a5d6ff;} .editor-body .f{color:#d2a8ff;}
+  .editor-body .c{color:#8b949e;}
+  .editor-body div{margin-bottom:4px;}
+ 
+  section{padding:70px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:36px;}
+  .section-num{font-family:var(--mono);color:var(--accent);font-size:14px;}
+  h2{font-size:26px;font-weight:700;}
+  .section-head::after{content:'';flex:1;height:1px;background:var(--line);}
+ 
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:50px;align-items:start;}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:var(--text-dim);margin-bottom:16px;}
+  .stack-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .stack-list li{font-family:var(--mono);font-size:13.5px;color:var(--text-dim);display:flex;gap:10px;align-items:center;}
+  .stack-list li::before{content:'▸';color:var(--accent);}
+ 
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+  .skill-card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s ease,box-shadow .3s ease;}
+  .skill-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:0 14px 30px -14px rgba(0,0,0,.5);}
+  .skill-card h3{font-size:15px;margin-bottom:10px;color:var(--text);}
+  .skill-card .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .skill-card .tag{font-family:var(--mono);font-size:11.5px;color:var(--accent);background:var(--accent-soft);
+    padding:3px 9px;border-radius:20px;}
+ 
+  /* EDUCATION & EXPERIENCE (timeline) */
+  .timeline{position:relative;padding-left:28px;}
+  .timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .timeline-item{position:relative;padding-bottom:32px;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{
+    content:'';position:absolute;left:-28px;top:4px;width:11px;height:11px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--accent);transition:box-shadow .3s ease;
+  }
+  .timeline-item:hover::before{box-shadow:0 0 0 5px var(--accent-soft);}
+  .timeline-date{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-bottom:4px;}
+  .timeline-item h3{font-size:16px;margin-bottom:2px;}
+  .timeline-item .org{font-size:13.5px;color:var(--text-dim);margin-bottom:8px;}
+  .timeline-item p{color:var(--text-dim);font-size:14px;max-width:560px;}
+ 
+  /* PROJECTS */
+  .project{
+    display:block;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:36px;margin-bottom:24px;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s ease,box-shadow .3s ease;
+  }
+  .project:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 14px 30px -14px rgba(0,0,0,.5);}
+  .project h3{font-size:26px;font-weight:800;margin-bottom:10px;color:var(--accent);letter-spacing:-0.01em;}
+  .project > p.project-desc{color:var(--text-dim);font-size:15px;margin-bottom:20px;max-width:640px;line-height:1.6;}
+  .project .tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+  .project .tags span{font-family:var(--mono);font-size:12px;color:var(--text);background:var(--bg-soft);border:1px solid var(--line);
+    padding:6px 14px;border-radius:20px;}
+  .project-features-head{
+    display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--text);
+    margin-bottom:16px;
+  }
+  .project-features-head svg{width:16px;height:16px;color:var(--accent);}
+  .project-features{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;list-style:none;margin-bottom:26px;
+  }
+  @media(max-width:640px){.project-features{grid-template-columns:1fr;}}
+  .project-features li{
+    position:relative;padding-left:18px;color:var(--text-dim);font-size:13.5px;line-height:1.55;
+  }
+  .project-features li::before{
+    content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--accent);
+  }
+  .project-links{display:flex;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;}
+  .project-links a{
+    display:inline-flex;align-items:center;gap:8px;color:var(--text);background:var(--bg-soft);
+    border:1px solid var(--line);padding:10px 18px;border-radius:8px;transition:.2s;
+  }
+  .project-links a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+  .project-links a svg{width:15px;height:15px;}
+ 
+  /* CONTACT */
+  /* CONTACT v2 */
+.contact-v2{padding:100px 0;}
+.contact-v2-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.contact-v2-head .bar{width:28px;height:2px;background:var(--accent);}
+.contact-v2-head h2{font-size:26px;}
+.contact-v2-intro{color:var(--text-dim);font-size:15px;max-width:600px;margin-bottom:36px;line-height:1.7;}
+.contact-v2-intro b{color:var(--text);font-weight:700;}
+
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
+@media(max-width:600px){.info-grid{grid-template-columns:1fr;}}
+.info-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  padding:18px 20px;display:flex;align-items:flex-start;justify-content:space-between;
+  transition:transform .25s ease,border-color .25s ease;
+}
+.info-card:hover{transform:translateY(-3px);border-color:var(--accent);}
+.info-card .label{font-family:var(--mono);font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.info-card .value{font-size:14px;color:var(--accent);word-break:break-word;}
+.info-card svg{width:18px;height:18px;color:var(--text-dim);flex-shrink:0;margin-left:12px;}
+
+.contact-form-card{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:32px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-group label{display:block;font-size:13px;color:var(--text-dim);margin-bottom:8px;}
+.form-group input,.form-group textarea{
+  width:100%;background:var(--bg-soft);border:1px solid var(--line);border-radius:8px;
+  padding:12px 14px;color:var(--text);font-family:var(--sans);font-size:14px;
+  transition:border-color .2s ease;
+}
+a.info-card{text-decoration:none;cursor:pointer;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-dim);opacity:.7;}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);}
+.form-group textarea{resize:vertical;min-height:110px;font-family:var(--sans);}
+.form-submit{
+  display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#1a1206;
+  font-weight:700;font-family:var(--mono);font-size:14px;padding:13px 26px;border:none;
+  border-radius:8px;cursor:pointer;transition:transform .2s ease,opacity .2s ease;
+}
+.form-submit:hover{transform:translateY(-2px);opacity:.9;}
+.form-submit svg{width:16px;height:16px;}
+  .socials{display:flex;justify-content:center;gap:16px;margin-top:38px;}
+  .socials a{
+    width:42px;height:42px;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);border-radius:50%;color:var(--text-dim);
+    transition:transform .25s ease,border-color .25s ease,color .25s ease,background .25s ease;
+  }
+  .socials a:hover{color:var(--bg);background:var(--accent);border-color:var(--accent);transform:translateY(-3px);}
+  .socials svg{width:18px;height:18px;}
+ 
+  footer{
+  border-top:1px solid var(--line);padding:48px 0 30px;text-align:center;
+}
+.footer-brand{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+}
+.footer-badge{
+  width:26px;height:26px;border-radius:7px;background:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-weight:800;font-size:13px;color:#1a1206;
+}
+.footer-brand span{font-size:15px;font-weight:700;color:var(--text);}
+.footer-links{
+  display:flex;justify-content:center;gap:28px;margin-bottom:22px;
+  font-family:var(--mono);font-size:13px;
+}
+.footer-links a{color:var(--text-dim);transition:color .2s ease;}
+.footer-links a:hover{color:var(--accent);}
+.footer-copy{font-family:var(--mono);font-size:12px;color:var(--text-dim);opacity:.7;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">minahil<span>.dev</span></div>
+      <div class="nav-links">
+        <a href="#about"><span class="num">01.</span>About</a>
+        <a href="#education"><span class="num">02.</span>Education</a>
+        <a href="#experience"><span class="num">03.</span>Experience</a>
+        <a href="#skills"><span class="num">04.</span>Skills</a>
+        <a href="#projects"><span class="num">05.</span>Projects</a>
+        <a href="#contact"><span class="num">06.</span>Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="border-top:none;">
+  <div class="wrap">
+    <div class="hero-top">
+      
+      <div>
+        <div class="eyebrow">Available for work</div>
+        <h1>Hi, I'm <span class="accent">Minahil Shahid</span>.</h1>
+        <div class="role">&gt; Full-Stack Developer<span class="cursor"></span></div>
+        <p class="lede">Computer Science student at PUCIT building full-stack MERN & Next.js applications, AI-integrated platforms, and blockchain security tools — from database design to deployment.</p>
+      </div>
+      <div class="hero-photo">
+        <img src="minahil.jpg" alt="Minahil Shahid">
+      </div>
+    </div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-ghost" href="#contact">Get in Touch</a>
+    </div>
+
+    <div class="editor">
+      <div class="editor-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="editor-title">about-me.js</span>
+      </div>
+      <div class="editor-body">
+        <div><span class="k">const</span> developer = {</div>
+        <div>&nbsp;&nbsp;name: <span class="s">'Minahil Shahid'</span>,</div>
+        <div>&nbsp;&nbsp;role: <span class="s">'Full-Stack Developer'</span>,</div>
+        <div>&nbsp;&nbsp;stack: [<span class="s">'Next.js'</span>, <span class="s">'TypeScript'</span>, <span class="s">'PostgreSQL'</span>],</div>
+        <div>&nbsp;&nbsp;learning: <span class="s">'always'</span>,</div>
+        <div>&nbsp;&nbsp;<span class="f">sayHi</span>: () =&gt; <span class="s">'let's build something'</span></div>
+        <div>};</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">01.</span><h2>About Me</h2></div>
+    <div class="about-grid reveal">
+      <div>
+<p>I'm a Computer Science student at PUCIT with hands-on experience building full-stack MERN and Next.js applications, AI-integrated platforms, and blockchain security tools. I enjoy the whole process — from designing a database schema to shipping a production-ready system that people can actually use.</p>
+<p>I'm skilled in prompt engineering, LLM integration, and full-stack debugging, and I love working across the stack: architecting APIs, building clean UIs, and wiring everything together into a system that just works. When I'm not coding, I'm usually organizing tech events or exploring new AI tools.</p>
+      </div>
+      <ul class="stack-list">
+        <li>JavaScript / TypeScript</li>
+        <li>React & Next.js</li>
+        <li>Angular</li>
+
+        <li>Node.js & Express</li>
+        <li>ASP.NET Core</li>
+<li>Spring Boot</li>
+
+        <li>MongoDB / PostgreSQL</li>
+        <li>Tailwind CSS</li>
+        <li>Git & GitHub</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">02.</span><h2>Education</h2></div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">Sep 2023 — Jun 2027</div>
+        <h3>Bachelor of Computer Science</h3>
+        <div class="org">Punjab University College of Information Technology (PUCIT)</div>
+        <p>CGPA: 3.64/4.0</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2021 — 2023</div>
+        <h3>Intermediate (Pre-Engineering)</h3>
+        <div class="org">Punjab Group of College</div>
+                <p>Marks: 981/1100</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">03.</span><h2>Experience</h2></div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2026 — Aug 2026</div>
+        <h3>Full-Stack Developer Intern</h3>
+        <div class="org">Hatzs Dimensions</div>
+        <p><p>As part of the team at Hatzs Dimensions, I built LeadFlow CRM — a multi-tenant lead management system. I architected 40+ RESTful API endpoints using Next.js and TypeScript, designed a Prisma/PostgreSQL backend with 9 relational data models, and implemented JWT authentication with role-based access control. I also integrated Google Gemini API with pgvector to power semantic search across the platform.</p></p>
+      </div>
+     
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">04.</span><h2>Skills</h2></div>
+    <div class="skills-grid reveal reveal-stagger">
+     <div class="skill-card">
+  <h3>Languages</h3>
+  <div class="tags"><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C++</span><span class="tag">C#</span><span class="tag">C</span><span class="tag">Kotlin</span></div>
+</div>
+<div class="skill-card">
+  <h3>Frontend</h3>
+  <div class="tags"><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Angular</span><span class="tag">Tailwind CSS</span><span class="tag">HTML5</span><span class="tag">CSS3</span></div>
+</div>
+<div class="skill-card">
+  <h3>Backend</h3>
+  <div class="tags"><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">ASP.NET Core</span><span class="tag">Spring Boot</span><span class="tag">REST APIs</span><span class="tag">Flask</span></div>
+</div>
+<div class="skill-card">
+  <h3>Databases</h3>
+  <div class="tags"><span class="tag">MongoDB</span><span class="tag">PostgreSQL</span><span class="tag">Prisma ORM</span></div>
+</div>
+<div class="skill-card">
+  <h3>AI / ML</h3>
+  <div class="tags">
+    <span class="tag">Prompt Engineering</span>
+    <span class="tag">LLM Integration (Gemini)</span>
+    <span class="tag">RAG Pipelines</span>
+    <span class="tag">LangChain</span>
+    <span class="tag">FAISS</span>
+    <span class="tag">HuggingFace</span>
+    <span class="tag">OpenCV</span>
+    <span class="tag">Scikit-learn</span>
+    <span class="tag">Pandas</span>
+    <span class="tag">NumPy</span>
+    <span class="tag">Streamlit</span>
+  </div>
+</div>
+<div class="skill-card">
+  <h3>Tools & Concepts</h3>
+  <div class="tags"><span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">Azure DevOps</span><span class="tag">Jira</span><span class="tag">Postman</span><span class="tag">JWT/OAuth</span><span class="tag">CI/CD</span><span class="tag">OOP</span></div>
+</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head"><span class="section-num">05.</span><h2>Projects</h2></div>
+ 
+    <div class="project reveal">
+      <h3>ContractSentinel</h3>
+      <p class="project-desc">An AI-powered smart contract security scanner that performs deep static analysis and real-time risk scoring of honeypots, rug pulls, and hidden vulnerabilities.</p>
+      <div class="tags"><span>Next.js</span><span>TypeScript</span><span>Gemini 2.0 Flash</span><span>PostgreSQL</span><span>Etherscan API</span></div>
+ 
+      <div class="project-features-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+        Key Features
+      </div>
+      <ul class="project-features">
+        <li>Integrated Gemini 2.0 Flash for deep static analysis and real-time vulnerability risk scoring</li>
+        <li>Implemented secure OAuth/JWT authentication with a Prisma/PostgreSQL backend</li>
+        <li>Integrated the Etherscan API to pull and analyze live on-chain contract data</li>
+        <li>Applied prompt engineering to produce accurate, structured vulnerability reports</li>
+      </ul>
+ 
+      <div class="project-links">
+        <a href="https://github.com/Minahil-Shahid23/ContractSentinel"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
+        <a href="https://contract-sentinal.vercel.app/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>Live Demo</a>
+      </div>
+    </div>
+ 
+    <div class="project reveal">
+      <h3>AI-FitStyler</h3>
+      <p class="project-desc">An AI-driven fashion advisor platform that analyzes body and skin tone to recommend curated, trend-aware outfits.</p>
+      <div class="tags"><span>Python</span><span>OpenCV</span><span>FAISS</span><span>Gemini AI</span><span>Streamlit</span></div>
+ 
+      <div class="project-features-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+        Key Features
+      </div>
+      <ul class="project-features">
+        <li>Engineered a multi-agent Python stylist using OpenCV for automated body/skin-tone analysis</li>
+        <li>Built a RAG pipeline with FAISS to match user profiles to curated fashion datasets</li>
+        <li>Integrated Gemini AI to generate trend-aware, personalized outfit critiques</li>
+        <li>Deployed the complete system on Streamlit Cloud for public access</li>
+      </ul>
+ 
+      <div class="project-links">
+        <a href="https://github.com/Minahil-Shahid23/AI-FitStyler-MultiAgent"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
+        <!-- <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>Live Demo</a> -->
+      </div>
+    </div>
+
+    <div class="project reveal">
+  <h3>LeadFlow CRM</h3>
+  <p class="project-desc">A multi-tenant CRM-style lead management system with OTP-based auth, a guided onboarding wizard, role-based dashboards, and AI-powered semantic search over a knowledge base.</p>
+  <div class="tags"><span>Next.js</span><span>TypeScript</span><span>Express.js</span><span>Prisma</span><span>PostgreSQL</span><span>Tailwind CSS</span></div>
+
+  <div class="project-features-head">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+    Key Features
+  </div>
+  <ul class="project-features">
+    <li>Built OTP-based registration, login, and password reset flows with a 7-step guided onboarding wizard</li>
+    <li>Designed role-based dashboards for Admin and Sales Agent roles with lead assignment and activity timelines</li>
+    <li>Implemented a public, unauthenticated lead-capture form per organization with rate limiting</li>
+    <li>Integrated an AI-powered knowledge base (RAG) for semantic FAQ and service lookup</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://github.com/Minahil-Shahid23/lead-management-frontend"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>Frontend Repo</a>
+    <a href="https://github.com/Shakir2005-s/lead-management-system"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>Backend Repo</a>
+  </div>
+</div>
+ 
+   
+    <div class="project reveal">
+  <h3>DevDock</h3>
+  <p class="project-desc">An AI-powered developer workspace that brings project management, Kanban task tracking, and AI-powered code review together in a single platform.</p>
+  <div class="tags"><span>ASP.NET Core 8</span><span>Angular</span><span>PostgreSQL</span><span>Gemini API</span><span>Docker</span></div>
+
+  <div class="project-features-head">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+    Key Features
+  </div>
+  <ul class="project-features">
+    <li>Built a Clean Architecture ASP.NET Core backend with JWT authentication and refresh token rotation</li>
+    <li>Designed a Kanban-style task board with project roles, priority levels, and deadline tracking</li>
+    <li>Integrated Google Gemini API for instant, structured AI code reviews with persisted review history</li>
+    <li>Fully containerized the API, Angular frontend, and PostgreSQL database with Docker Compose</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://github.com/Minahil-Shahid23/DevDock"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
+  </div>
+</div>
+ <div class="project reveal">
+      <h3>Enchanted Trinkets</h3>
+      <p class="project-desc">A complete e-commerce platform for a jewelry brand, independently designed and built end to end using the MERN stack.</p>
+      <div class="tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Cloudinary</span></div>
+ 
+      <div class="project-features-head">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+        Key Features
+      </div>
+      <ul class="project-features">
+        <li>Built 10+ jewelry product pages with a full admin dashboard for inventory management</li>
+        <li>Integrated Cloudinary for cloud-based product image storage and delivery</li>
+        <li>Designed RESTful APIs and reusable React components across the app</li>
+        <li>Set up a CI/CD pipeline and deployed the full stack to Vercel</li>
+      </ul>
+ 
+      <div class="project-links">
+        <a href="https://github.com/Minahil-Shahid23/enchanted-trinkets-ecommerce"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
+        <!-- <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>Live Demo</a> -->
+      </div>
+    </div>
+<div class="project reveal">
+  <h3>URL SQLi Vulnerability Scanner</h3>
+  <p class="project-desc">A professional web security tool that scans URLs for potential SQL Injection vulnerabilities, analyzing them against multiple payload categories and generating detailed security reports.</p>
+  <div class="tags"><span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>JavaScript</span></div>
+
+  <div class="project-features-head">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+    Key Features
+  </div>
+  <ul class="project-features">
+    <li>Built real-time URL scanning that analyzes targets against multiple SQLi payloads</li>
+    <li>Categorized detected vulnerabilities into Most Critical, Moderate, and Least Critical severity levels</li>
+    <li>Added dark/light theme toggle and downloadable offline HTML security reports</li>
+    <li>Designed a modern, responsive UI with a Node.js/Express and MongoDB backend</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://github.com/Minahil-Shahid23/url-sqli-vulnerability-scanner"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
+  </div>
+  </div>
+  <div class="project reveal">
+  <h3>Shop Admin Dashboard <span style="font-size:14px;color:var(--text-dim);font-weight:400;"></span></h3>
+  <p class="project-desc">A full-stack internship assessment: hardening an internal admin panel for a mid-size online shop against production-shaped guarantees — fast search at scale, concurrency-safe checkout, and strict role-based access control. Built on a Next.js/Express/PostgreSQL starter scaffold.</p>
+  <div class="tags"><span>Next.js</span><span>Express.js</span><span>PostgreSQL</span><span>TypeScript</span></div>
+
+  <div class="project-features-head">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6L5.7 21l2.3-7-6-4.6h7.6z"/></svg>
+    Key Features
+  </div>
+  <ul class="project-features">
+    <li>Optimized the paginated product search/filter/sort query to hold p95 latency under 300ms at load</li>
+    <li>Prevented overselling under concurrent checkout using transactional stock locking</li>
+    <li>Implemented idempotency-key handling so retried checkout requests never create duplicate orders</li>
+    <li>Enforced admin/viewer role-based access control at the API layer, plus timezone-aware ("Asia/Karachi") reporting</li>
+  </ul>
+
+  <div class="project-links">
+    <a href="https://github.com/shamsshahmir/shop-admin-minahil"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
+  </div>
+</div>
+</section>
+<section id="contact" class="contact-v2 reveal">
+  <div class="wrap">
+    <div class="contact-v2-head"><div class="bar"></div><h2>Get In Touch</h2></div>
+    <p class="contact-v2-intro">I'm open to <b>software engineering roles</b>, <b>full-stack development</b>, and <b>AI-integrated projects</b>. Let's build something extraordinary together.</p>
+
+    <div class="info-grid">
+      <a href="mailto:minahilsh3@gmail.com" class="info-card">
+  <div>
+    <div class="label">Email</div>
+    <div class="value">minahilsh3@gmail.com</div>
+  </div>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 6l-10 7L2 6"/><path d="M2 6h20v12H2z"/></svg>
+</a>
+      <a href="https://github.com/Minahil-Shahid23" target="_blank" class="info-card">
+  <div>
+    <div class="label">GitHub</div>
+    <div class="value">github.com/Minahil-Shahid23</div>
+  </div>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>
+</a>
+
+<a href="https://linkedin.com/in/minahil-shahid" target="_blank" class="info-card">
+  <div>
+    <div class="label">LinkedIn</div>
+    <div class="value">linkedin.com/in/minahil-shahid</div>
+  </div>
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.24h4V23h-4V8.24zM8.5 8.24h3.83v2.02h.05c.53-1 1.84-2.06 3.79-2.06 4.06 0 4.81 2.67 4.81 6.14V23h-4v-6.9c0-1.65-.03-3.77-2.3-3.77-2.3 0-2.66 1.8-2.66 3.65V23h-4V8.24z"/></svg>
+</a>
+      <!-- <div class="info-card">
+        <div>
+          <div class="label">Resume</div>
+          <div class="value">View Full Resume</div>
+        </div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+      </div> -->
+    </div>
+
+    <div class="contact-form-card">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Minahil Shahid">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="minahil@example.com">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:24px;">
+        <label>Message</label>
+        <textarea placeholder="How can I help you?"></textarea>
+      </div>
+      <button class="form-submit" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg>
+        Send Message
+      </button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-badge">M</div>
+    <span>Minahil Shahid</span>
+  </div>
+  <div class="footer-links">
+    <a href="#about">Home</a>
+    <a href="#education">Journey</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Minahil Shahid. All rights reserved.</div>
+</footer>
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
+</script>
+</body>
+</html>
