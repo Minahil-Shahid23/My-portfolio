@@ -224,6 +224,19 @@
   .timeline-item .org{font-size:13.5px;color:var(--text-dim);margin-bottom:8px;}
   .timeline-item p{color:var(--text-dim);font-size:14px;max-width:560px;}
  
+  /* PROJECT FILTER TABS */
+  .filter-tabs{
+    display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px;
+  }
+  .filter-btn{
+    font-family:var(--mono);font-size:13px;color:var(--text-dim);
+    background:var(--panel);border:1px solid var(--line);border-radius:20px;
+    padding:9px 18px;cursor:pointer;transition:all .2s ease;
+  }
+  .filter-btn:hover{border-color:var(--accent);color:var(--accent);}
+  .filter-btn.active{background:var(--accent);color:#1a1206;font-weight:700;border-color:var(--accent);}
+  .project.hidden{display:none;}
+
   /* PROJECTS */
   .project{
     display:block;
@@ -507,8 +520,15 @@ a.info-card{text-decoration:none;cursor:pointer;}
 <section id="projects">
   <div class="wrap">
     <div class="section-head"><span class="section-num">05.</span><h2>Projects</h2></div>
+
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
+      <button class="filter-btn" data-filter="aiml">AI/ML</button>
+      <button class="filter-btn" data-filter="security">Security</button>
+    </div>
  
-    <div class="project reveal">
+    <div class="project reveal" data-category="fullstack aiml security">
       <h3>ContractSentinel</h3>
       <p class="project-desc">An AI-powered smart contract security scanner that performs deep static analysis and real-time risk scoring of honeypots, rug pulls, and hidden vulnerabilities.</p>
       <div class="tags"><span>Next.js</span><span>TypeScript</span><span>Gemini 2.0 Flash</span><span>PostgreSQL</span><span>Etherscan API</span></div>
@@ -530,7 +550,7 @@ a.info-card{text-decoration:none;cursor:pointer;}
       </div>
     </div>
  
-    <div class="project reveal">
+    <div class="project reveal" data-category="aiml">
       <h3>AI-FitStyler</h3>
       <p class="project-desc">An AI-driven fashion advisor platform that analyzes body and skin tone to recommend curated, trend-aware outfits.</p>
       <div class="tags"><span>Python</span><span>OpenCV</span><span>FAISS</span><span>Gemini AI</span><span>Streamlit</span></div>
@@ -551,7 +571,7 @@ a.info-card{text-decoration:none;cursor:pointer;}
       </div>
     </div>
 
-    <div class="project reveal">
+    <div class="project reveal" data-category="fullstack">
   <h3>LeadFlow CRM</h3>
   <p class="project-desc">A multi-tenant CRM-style lead management system with OTP-based auth, a guided onboarding wizard, role-based dashboards, and AI-powered semantic search over a knowledge base.</p>
   <div class="tags"><span>Next.js</span><span>TypeScript</span><span>Express.js</span><span>Prisma</span><span>PostgreSQL</span><span>Tailwind CSS</span></div>
@@ -574,7 +594,7 @@ a.info-card{text-decoration:none;cursor:pointer;}
 </div>
  
    
-    <div class="project reveal">
+    <div class="project reveal" data-category="fullstack aiml">
   <h3>DevDock</h3>
   <p class="project-desc">An AI-powered developer workspace that brings project management, Kanban task tracking, and AI-powered code review together in a single platform.</p>
   <div class="tags"><span>ASP.NET Core 8</span><span>Angular</span><span>PostgreSQL</span><span>Gemini API</span><span>Docker</span></div>
@@ -594,7 +614,7 @@ a.info-card{text-decoration:none;cursor:pointer;}
     <a href="https://github.com/Minahil-Shahid23/DevDock"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
   </div>
 </div>
- <div class="project reveal">
+ <div class="project reveal" data-category="fullstack">
       <h3>Enchanted Trinkets</h3>
       <p class="project-desc">A complete e-commerce platform for a jewelry brand, independently designed and built end to end using the MERN stack.</p>
       <div class="tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Cloudinary</span></div>
@@ -614,7 +634,7 @@ a.info-card{text-decoration:none;cursor:pointer;}
         <a href="https://github.com/Minahil-Shahid23/enchanted-trinkets-ecommerce"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
       </div>
     </div>
-<div class="project reveal">
+<div class="project reveal" data-category="fullstack security">
   <h3>URL SQLi Vulnerability Scanner</h3>
   <p class="project-desc">A professional web security tool that scans URLs for potential SQL Injection vulnerabilities, analyzing them against multiple payload categories and generating detailed security reports.</p>
   <div class="tags"><span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>JavaScript</span></div>
@@ -634,7 +654,7 @@ a.info-card{text-decoration:none;cursor:pointer;}
     <a href="https://github.com/Minahil-Shahid23/url-sqli-vulnerability-scanner"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05a9.3 9.3 0 0 1 2.5-.34c.85 0 1.7.11 2.5.34 1.91-1.32 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>View Source</a>
   </div>
   </div>
-  <div class="project reveal">
+  <div class="project reveal" data-category="fullstack">
   <h3>Shop Admin Dashboard <span style="font-size:14px;color:var(--text-dim);font-weight:400;"></span></h3>
   <p class="project-desc">A full-stack internship assessment: hardening an internal admin panel for a mid-size online shop against production-shaped guarantees — fast search at scale, concurrency-safe checkout, and strict role-based access control. Built on a Next.js/Express/PostgreSQL starter scaffold.</p>
   <div class="tags"><span>Next.js</span><span>Express.js</span><span>PostgreSQL</span><span>TypeScript</span></div>
@@ -746,6 +766,25 @@ a.info-card{text-decoration:none;cursor:pointer;}
       navLinks.classList.remove('open');
       navToggle.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Project category filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project[data-category]');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      projectCards.forEach(card => {
+        const cats = card.getAttribute('data-category').split(' ');
+        if(filter === 'all' || cats.includes(filter)){
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
     });
   });
 </script>
